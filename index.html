@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snack Kita - Jajanan Manis Pilihan</title>
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <style>
+      /* --- CSS Variables untuk Warna Tema --- */
+      :root {
+        --primary-color: #6f4e37; /* Coklat Tua */
+        --secondary-color: #c8a882; /* Coklat Muda/Krem */
+        --background-color: #f5e6d3; /* Latar Belakang Coklat Sangat Muda */
+        --accent-color: #e07a5f; /* Aksen Oranye-Coklat */
+        --text-color: #333;
+        --paragraph-color: #7a5c47;
+        --light-text-color: #f4f4f4;
+        --border-color: #ddd;
+      }
+
+      /* --- Global Styles & Reset --- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      h1,
+      h2,
+      h3,
+      span {
+        color: var(--primary-color);
+        font-weight: 600;
+        color: #e1b07c;
+      }
+
+      p {
+        color: var(--paragraph-color);
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      /* --- Header & Navigasi --- */
+      header {
+        background-color: var(--primary-color);
+        color: var(--light-text-color);
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* Perubahan pada CSS logo */
+      header .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-decoration: none;
+        color: #fff; /* Warna untuk "Snack" */
+      }
+
+      header .logo span {
+        color: #e1b07c; /* Warna untuk "Kita" */
+      }
+
+      header nav ul {
+        display: flex;
+        list-style: none;
+        align-items: center;
+        gap: 25px;
+      }
+
+      /* --- MODIFIKASI DIMULAI DI SINI --- */
+      /* CSS untuk link navigasi dengan efek garis bawah */
+      header nav a {
+        color: var(--light-text-color);
+        text-decoration: none;
+        font-weight: 500;
+        padding-bottom: 5px; /* Jarak antara teks dan garis */
+        border-bottom: 2px solid transparent; /* Siapkan garis bawah transparan */
+        transition: color 0.3s ease, border-bottom-color 0.3s ease; /* Animasi untuk warna teks dan garis */
+      }
+
+      header nav a:hover {
+        color: var(--secondary-color);
+        border-bottom-color: var(
+          --secondary-color
+        ); /* Munculkan garis bawah saat hover */
+      }
+      /* --- AKHIR MODIFIKASI --- */
+
+      header .nav-icons {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      header .nav-icons a {
+        color: var(--light-text-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      header .nav-icons a i {
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+
+      /* Efek hover ikon MENGECIL dan berubah warna */
+      header .nav-icons a:hover i {
+        transform: scale(0.8);
+        color: var(--secondary-color);
+      }
+
+      /* --- Home Section --- */
+      /* --- PERBAIKAN: Memindahkan style dari #home a:hover ke #home --- */
+      #home {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        min-height: 80vh;
+        background: linear-gradient(
+            rgba(111, 78, 55, 0.7),
+            rgba(111, 78, 55, 0.7)
+          ),
+          url("img/kjadkdas.png") no-repeat center center/cover;
+        color: var(--light-text-color);
+      }
+
+      #home h1 {
+        font-size: 3.5rem;
+        color: var(--light-text-color);
+        margin-bottom: 1rem;
+      }
+
+      #home p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        color: var(--light-text-color);
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--accent-color);
+        color: var(--light-text-color);
+        padding: 12px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .btn:hover {
+        background-color: #d66a4e;
+        transform: translateY(-3px);
+      }
+
+      /* --- About Section --- */
+      #about .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        background-color: #fff;
+        padding: 50px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      #about img {
+        max-width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      #about h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #6f4e37;
+      }
+
+      /* --- Products Section --- */
+      #products h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #6f4e37;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+      }
+
+      .product-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .product-card h3 {
+        margin: 15px 0 10px;
+      }
+
+      .product-card .price {
+        color: var(--accent-color);
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+      }
+
+      /* --- Location Map Section --- */
+      #location-map {
+        padding: 0;
+      }
+      #location-map h2 {
+        text-align: center;
+        padding: 60px 0 20px;
+        font-size: 2.5rem;
+        color: var(--primary-color);
+      }
+      #map-container {
+        width: 100%;
+        height: 400px;
+      }
+      #map-container iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      /* --- Customer Order Section --- */
+      #customer-order {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        max-width: 800px;
+        margin: 60px auto;
+        padding: 50px;
+      }
+      #customer-order h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .order-form {
+        display: grid;
+        gap: 20px;
+      }
+
+      .order-form .form-group {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .order-form label {
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .order-form input,
+      .order-form textarea,
+      .order-form select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .order-form textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .order-form .btn {
+        justify-self: center;
+        margin-top: 10px;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* --- Contact & Footer --- */
+      footer {
+        background-color: var(--primary-color);
+        color: var(--light-text-color);
+        padding: 40px 0 20px;
+        text-align: center;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-bottom: 30px;
+      }
+
+      .footer-section h3 {
+        color: var(--secondary-color);
+        margin-bottom: 15px;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .footer-section a {
+        color: var(--light-text-color);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      .footer-section a i {
+        color: var(--secondary-color);
+      }
+
+      .footer-section a:hover {
+        color: var(--secondary-color);
+        transform: scale(1.05);
+      }
+
+      .footer-section a:hover i {
+        color: var(--accent-color);
+      }
+
+      /* PERBAIKAN: Warna paragraf di footer dibuat terang agar terlihat */
+      footer p {
+        color: var(--light-text-color);
+      }
+
+      footer .copyright {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 20px;
+        font-size: 0.9rem;
+      }
+
+      /* --- Responsive Design --- */
+      @media (max-width: 768px) {
+        header .container {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        header nav ul {
+          gap: 15px;
+        }
+
+        #home h1 {
+          font-size: 2.5rem;
+        }
+
+        #about .container,
+        #customer-order {
+          grid-template-columns: 1fr;
+          padding: 30px 20px;
+          text-align: center;
+        }
+
+        #about img {
+          margin-bottom: 20px;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+
+      /* --- PERUBAHAN: CSS untuk Notifikasi --- */
+      .notification {
+        visibility: hidden;
+        min-width: 300px;
+        margin-left: -150px; /* Pusatkan notifikasi secara horizontal */
+        background-color: #28a745; /* PERUBAHAN 1: Warna hijau */
+        color: var(--light-text-color);
+        text-align: center;
+        border-radius: 8px;
+        padding: 16px 20px;
+        position: fixed;
+        z-index: 1001;
+        top: 80%; /* PERUBAHAN 2: Posisi di tengah agak ke bawah */
+        left: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .notification.show {
+        visibility: visible;
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Elemen Notifikasi -->
+    <div id="notification" class="notification">
+      Terima Kasih atas pesanan Anda!
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <a href="#home" class="logo">Snack <span>Kita</span></a>
+        <nav>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="nav-icons">
+          <a href="#products" title="Cari Produk"
+            ><i data-feather="search"></i
+          ></a>
+          <a href="#customer-order" title="Lihat Keranjang/Pesan"
+            ><i data-feather="shopping-cart"></i
+          ></a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Home Section -->
+      <section id="home">
+        <div class="container">
+          <h1>Selamat Datang di Snack <span>Kita</span></h1>
+          <p>
+            Temukan berbagai pilihan jajanan manis yang lezat, dibuat dengan
+            bahan berkualitas sehingga menciptakan rasa yang nikmat.
+          </p>
+          <a href="#products" class="btn">Lihat Produk</a>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about">
+        <div class="container">
+          <img src="img/dapur.jpeg" alt="Tentang Kami" />
+          <div>
+            <h2>Tentang <span>Kami</span></h2>
+            <p>
+              Manisnya Snack lahir untuk menciptakan camilan manis yang tidak
+              hanya enak, tetapi juga membawa keceriaan. Kami percaya bahwa
+              setiap gigitan adalah sebuah pengalaman, itulah mengapa kami
+              menggunakan resep pilihan dan bahan-bahan segar pilihan.
+            </p>
+            <p>
+              Teman setia di setiap momen spesial Anda, dari sekadar ngopi sore
+              hingga Acara bersama keluarga. Selamat menikmati manisnya
+              kehidupan dengan kami!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Products Section -->
+      <section id="products">
+        <div class="container">
+          <h2>Produk <span>Kami</span></h2>
+          <div class="products-grid">
+            <div class="product-card">
+              <img
+                src="img/Like a Box Brownies - The BEST Homemade Brownies.jpeg"
+                alt="Brownies"
+              />
+              <h3>Brownies coklat</h3>
+              <p class="price">Rp 40.000</p>
+              <p>Brownies coklat legit dengan lapisan atas yang renyah.</p>
+              <a href="#" class="btn">Tambah ke Keranjang</a>
+            </div>
+            <div class="product-card">
+              <img src="img/donat aneka rasa.jpeg" alt="Donat" />
+              <h3>Donat Aneka Rasa</h3>
+              <p class="price">Rp 35.000 / setengah lusin</p>
+              <p>Donat lembut dengan lapisan gula yang sempurna.</p>
+              <a href="#" class="btn">Tambah ke Keranjang</a>
+            </div>
+            <div class="product-card">
+              <img
+                src="img/Brownies kukus ketan hitam pandan.jpeg"
+                alt="Brownies "
+              />
+              <h3>Brownies Kukus</h3>
+              <p class="price">Rp 25.000</p>
+              <p>
+                Brownies kukus dengan ketan hitam pandan yang menyedapkan rasa.
+              </p>
+              <a href="#" class="btn">Tambah ke Keranjang</a>
+            </div>
+            <div class="product-card">
+              <img src="img/bolu.jpeg" alt="Brownies " />
+              <h3>Bolu Pisang</h3>
+              <p class="price">Rp 27.000</p>
+              <p>Bolu dengan rasa pisang yang menggoyangkan lidah.</p>
+              <a href="#" class="btn">Tambah ke Keranjang</a>
+            </div>
+            <div class="product-card">
+              <img src="img/Roti bakar.jpeg" alt="Brownies " />
+              <h3>Roti Bakar</h3>
+              <p class="price">Rp 15.000</p>
+              <p>Roti Bakar dengan aneka rasa yang nikmat disantap.</p>
+              <a href="#" class="btn">Tambah ke Keranjang</a>
+            </div>
+            <div class="product-card">
+              <img src="img/download.jpeg" alt="Brownies " />
+              <h3>Bakpao Coklat</h3>
+              <p class="price">Rp 10.000</p>
+              <p>Bakpao lembut dengan coklat yang lumer.</p>
+              <a href="#" class="btn">Tambah ke Keranjang</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Location Map Section -->
+      <section id="location-map">
+        <h2>Temui <span>Kami</span></h2>
+        <div id="map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!4v1765414363886!6m8!1m7!1sSXsWEaNNToJRJH58KGpDsQ!2m2!1d-6.788132304150094!2d110.8305221679551!3f80.17354115045212!4f-31.242589609794024!5f0.7820865974627469"
+            width="600"
+            height="450"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </section>
+
+      <!-- Customer Order Section -->
+      <section id="customer-order">
+        <div class="container">
+          <h2>Formulir Pesanan</h2>
+          <!-- Tambahkan id pada form untuk JavaScript -->
+          <form
+            id="orderForm"
+            class="order-form"
+            action="https://formspree.io/f/mjknaddw"
+            method="POST"
+          >
+            <div class="form-group">
+              <label for="name">Nama Lengkap</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">No. Telepon/WhatsApp</label>
+              <input type="tel" id="phone" name="phone" required />
+            </div>
+            <div class="form-group">
+              <label for="product-choice">Pilih Produk</label>
+              <select id="product-choice" name="product-choice" required>
+                <option value="">-- Pilih Produk --</option>
+                <option value="brownies">Brownies Coklat</option>
+                <option value="donat">Donat Aneka Rasa</option>
+                <option value="kue-tart">Brownies Kukus</option>
+                <option value="kue-tart">Bolu Pisang</option>
+                <option value="kue-tart">Roti Bakar</option>
+                <option value="kue-tart">Bakpao</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="quantity">Jumlah</label>
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="1"
+                value="1"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="address">Alamat Pengiriman</label>
+              <textarea id="address" name="address" required></textarea>
+            </div>
+            <button type="submit" class="btn">Kirim Pesanan</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Kontak Kami</h3>
+            <ul>
+              <li>
+                <a href="https://wa.me/+62 823-2184-5003" target="_blank"
+                  ><i data-feather="phone"></i> +62 823-2184-5003</a
+                >
+              </li>
+              <li>
+                <a href="mailto:sria187@gmail.com"
+                  ><i data-feather="mail"></i> sria187@gmail.com</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.google.com/maps/embed?pb=!4v1765414363886!6m8!1m7!1sSXsWEaNNToJRJH58KGpDsQ!2m2!1d-6.788132304150094!2d110.8305221679551!3f80.17354115045212!4f-31.242589609794024!5f0.7820865974627469"
+                  target="_blank"
+                  ><i data-feather="map-pin"></i> Gribig, Kec. Gebog, Kabupaten
+                  Kudus, Jawa Tengah</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Jam Buka</h3>
+            <p>Senin - Jumat: 09:00 - 20:00</p>
+            <p>Sabtu - Minggu: 10:00 - 22:00</p>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2025 Snack Kita. Sri Asiati.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      // Inisialisasi Feather Icons
+      feather.replace();
+
+      // JavaScript untuk Smooth Scrolling
+      document.addEventListener("DOMContentLoaded", function () {
+        const orderForm = document.getElementById("orderForm");
+        const notification = document.getElementById("notification");
+
+        orderForm.addEventListener("submit", function (event) {
+          event.preventDefault(); // tetap cegah reload karena kita pakai fetch
+
+          const formData = new FormData(orderForm);
+
+          fetch(orderForm.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+              Accept: "application/json",
+            },
+          })
+            .then(function (response) {
+              if (response.ok) {
+                // sukses: tampilkan notifikasi
+                notification.classList.add("show");
+                setTimeout(function () {
+                  notification.classList.remove("show");
+                }, 4000);
+                orderForm.reset();
+              } else {
+                return response.json().then(function (data) {
+                  throw new Error(
+                    (data && data.error) || "Terjadi error saat pengiriman."
+                  );
+                });
+              }
+            })
+            .catch(function (error) {
+              // Tampilkan pesan error sederhana (bisa ditingkatkan UI-nya)
+              notification.textContent = "Gagal mengirim pesanan. Coba lagi.";
+              notification.style.backgroundColor = "#dc3545"; // merah
+              notification.classList.add("show");
+              setTimeout(function () {
+                // kembalikan teks dan warna setelah 4 detik
+                notification.classList.remove("show");
+                notification.textContent = "Terima Kasih atas pesanan Anda!";
+                notification.style.backgroundColor = "";
+              }, 4000);
+              console.error("Form submit error:", error);
+            });
+        });
+      });
+
+      // JavaScript untuk Notifikasi Form Pesanan
+      document.addEventListener("DOMContentLoaded", function () {
+        const orderForm = document.getElementById("orderForm");
+        const notification = document.getElementById("notification");
+
+        orderForm.addEventListener("submit", function (event) {
+          // Mencegah form agar tidak benar-benar dikirim (reload halaman)
+          event.preventDefault();
+
+          // Kumpulkan data form
+          const formData = new FormData(orderForm);
+
+          // Kirim data ke Formspree menggunakan fetch
+          fetch(orderForm.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+              Accept: "application/json",
+            },
+          })
+            .then(function (response) {
+              if (response.ok) {
+                // Sukses: tampilkan notifikasi terima kasih
+                notification.textContent = "Terima Kasih atas pesanan Anda!";
+                notification.style.backgroundColor = "#28a745"; // hijau
+                notification.classList.add("show");
+
+                // Setelah 4 detik, sembunyikan notifikasi
+                setTimeout(function () {
+                  notification.classList.remove("show");
+                }, 4000);
+
+                // Kosongkan form
+                orderForm.reset();
+              } else {
+                // Jika ada error dari server
+                return response.json().then(function (data) {
+                  throw new Error(
+                    (data && data.error) || "Terjadi error saat pengiriman."
+                  );
+                });
+              }
+            })
+            .catch(function (error) {
+              // Tampilkan pesan error
+              notification.textContent = "Gagal mengirim pesanan. Coba lagi.";
+              notification.style.backgroundColor = "#dc3545"; // merah
+              notification.classList.add("show");
+
+              // Setelah 4 detik, kembalikan notifikasi ke keadaan normal
+              setTimeout(function () {
+                notification.classList.remove("show");
+                notification.textContent = "Terima Kasih atas pesanan Anda!";
+                notification.style.backgroundColor = ""; // reset ke CSS default
+              }, 4000);
+
+              console.error("Form submit error:", error);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>
